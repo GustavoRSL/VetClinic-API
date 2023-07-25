@@ -1,18 +1,18 @@
-import express from "express";
-import { Router, Request, Response } from "express";
+import express, { Request, Response } from "express";
+import { Router } from "express";
 import dotenv from "dotenv";
 
 dotenv.config();
+
+import { router as tutors } from "./routes/tutors";
 
 const app = express();
 const port = process.env.PORT || 3000;
 const router = Router();
 app.use(express.json());
 
-app.get("/", (req: Request, res: Response) => {
-  res.send("Hello World!!!");
-});
+app.use("/api/v1", tutors);
 
 app.listen(port, () => {
-  console.log(`👂 Server is listening on http://localhost:${port}`);
+  console.log(`👂 Server is listening on http://localhost:${port} `);
 });
