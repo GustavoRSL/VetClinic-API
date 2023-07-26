@@ -5,7 +5,7 @@ import Data from "../tutors.json";
 const getAllTutors = async (req: Request, res: Response) => {
   try {
     const data = Data;
-    return res.status(200).send(data);
+    return res.status(200).json(data);
   } catch (error) {
     return res.status(500).json({ msg: "Error!" });
   }
@@ -32,10 +32,10 @@ const updateTutor = async (req: Request, res: Response) => {
     let newTutor: Tutor = data.find((tutor: Tutor) => tutor.id === +id);
     newTutor = { id, ...Tutor };
 
-    if (!newTutor) return res.send(404).json({ msg: "Tutor not found!" });
+    if (!newTutor) return res.status(404).json({ msg: "Tutor not found!" });
 
     data.splice(+id - 1, 1, newTutor);
-    return res.status(200).send(newTutor);
+    return res.status(200).json(newTutor);
   } catch (error) {
     return res.status(500).json({ msg: "Error!" });
   }
@@ -46,12 +46,13 @@ const deleteTutor = async (req: Request, res: Response) => {
     const { id } = req.params;
     if (!id) return res.status(500).json({ msg: "Informe um ID!" });
     const data = Data;
-    let deleteTutor: Tutor = data.find((tutor: Tutor) => tutor.id === +id);
+    let deleteTutor: number = data.findIndex((el: Tutor) => el.id === +id);
 
-    if (!deleteTutor) return res.send(404).json({ msg: "Tutor not found!" });
+    if (deleteTutor === -1)
+      return res.status(404).json({ msg: "Tutor not found!" });
 
-    data.splice(+id - 1, 1);
-    return res.status(200).send();
+    data.splice(deleteTutor, 1);
+    return res.sendStatus(200);
   } catch (error) {
     return res.status(500).json({ msg: "Error!" });
   }
