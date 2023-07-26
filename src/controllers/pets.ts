@@ -44,4 +44,21 @@ const updatePet = async (req: Request, res: Response) => {
   }
 };
 
-export { createPet, updatePet };
+const deletePet = async (req: Request, res: Response) => {
+  try {
+    const { petId, tutorId } = req.params;
+    const data = Data;
+
+    const tutor: Tutor = data.find((tutor) => tutor.id === +tutorId);
+    if (!tutor) return res.status(500).json({ msg: "Tutor not found!" });
+
+    let petIndex = tutor.pets.findIndex((pet: Pet) => pet.id === +petId);
+    if (petIndex === -1) return res.status(500).json({ msg: "Pet not found!" });
+
+    tutor.pets.splice(petIndex, 1);
+
+    return res.sendStatus(200);
+  } catch (error) {}
+};
+
+export { createPet, updatePet, deletePet };
