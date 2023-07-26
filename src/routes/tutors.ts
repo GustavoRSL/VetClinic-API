@@ -1,9 +1,10 @@
 import { Router } from "express";
-import { getAllTutors, createTutor } from "../controllers/tutors";
+import { getAllTutors, createTutor, updateTutor } from "../controllers/tutors";
 
 const router = Router();
 
 router.get("/tutors", getAllTutors);
 router.post("/tutor", createTutor);
+router.put("/tutor/:id", updateTutor);
 
 export { router };
