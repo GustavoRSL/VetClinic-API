@@ -50,21 +50,18 @@ const updateTutor = async (req: Request, res: Response) => {
   }
 };
 
-// const deleteTutor = async (req: Request, res: Response) => {
-//   try {
-//     const { id } = req.params;
-//     if (!id) return res.status(500).json({ msg: "Informe um ID!" });
-//     const data = Data;
-//     let deleteTutor: number = data.findIndex((el: Tutor) => el.id === +id);
+const deleteTutor = async (req: Request, res: Response) => {
+  try {
+    const { id } = req.params;
+    const deletedTutor = await TutorModel.findByIdAndRemove(id);
 
-//     if (deleteTutor === -1)
-//       return res.status(404).json({ msg: "Tutor not found!" });
+    if (deletedTutor === null)
+      return res.status(404).json({ error: "Tutor not found!" });
 
-//     data.splice(deleteTutor, 1);
-//     return res.sendStatus(200);
-//   } catch (error) {
-//     return res.status(500).json({ msg: "Error!" });
-//   }
-// };
+    return res.sendStatus(200);
+  } catch (error) {
+    res.status(500).json({ error: "Error deleting Tutor" });
+  }
+};
 
-export { getAllTutors, createTutor, updateTutor };
+export { getAllTutors, createTutor, updateTutor, deleteTutor };
