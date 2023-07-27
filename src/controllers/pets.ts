@@ -39,27 +39,35 @@ const updatePet = async (req: Request, res: Response) => {
       { new: true, arrayFilters: [{ "pet._id": petId }] }
     );
 
+    if (!updateTutor)
+      return res.status(404).json({ error: "Tutor not Found!" });
+
     return res.status(200).json(updatePet);
   } catch (error) {
     res.status(500).json({ error: "Error updating Pet!" });
   }
 };
 
-// const deletePet = async (req: Request, res: Response) => {
-//   try {
-//     const { petId, tutorId } = req.params;
-//     const data = Data;
+const deletePet = async (req: Request, res: Response) => {
+  try {
+    const { petId, tutorId } = req.params;
 
-//     const tutor: Tutor = data.find((tutor) => tutor.id === +tutorId);
-//     if (!tutor) return res.status(500).json({ msg: "Tutor not found!" });
+    const deletePet: IPet = await PetModel.findByIdAndDelete(petId);
 
-//     let petIndex = tutor.pets.findIndex((pet: Pet) => pet.id === +petId);
-//     if (petIndex === -1) return res.status(500).json({ msg: "Pet not found!" });
+    if (deletePet === null)
+      return res.status(404).json({ error: "Pet not Found!" });
 
-//     tutor.pets.splice(petIndex, 1);
+    const updateTutor = await TutorModel.findByIdAndUpdate(
+      tutorId,
+      { $pull: { pets: { _id: petId } } },
+      { new: true }
+    );
 
-//     return res.sendStatus(200);
-//   } catch (error) {}
-// };
+    if (!updateTutor)
+      return res.status(404).json({ error: "Tutor not Found!" });
 
-export { createPet, updatePet };
+    return res.sendStatus(200);
+  } catch (error) {}
+};
+
+export { createPet, updatePet, deletePet };
