@@ -4,7 +4,7 @@ import {
   createTutor,
   updateTutor,
   deleteTutor,
-} from "../controllers/tutors"
+} from "@/controllers/tutors"
 
 const router = Router()
 

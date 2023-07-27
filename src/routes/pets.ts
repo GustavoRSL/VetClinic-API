@@ -1,5 +1,5 @@
 import { Router } from "express"
-import { createPet, updatePet, deletePet } from "../controllers/pets"
+import { createPet, updatePet, deletePet } from "@/controllers/pets"
 
 const router = Router()
 

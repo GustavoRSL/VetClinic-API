@@ -1,5 +1,5 @@
 import { Request, Response } from "express"
-import { ITutor, TutorModel } from "../model/tutor"
+import { ITutor, TutorModel } from "@/model/tutor"
 
 const getAllTutors = async (req: Request, res: Response): Promise<Response> => {
   try {

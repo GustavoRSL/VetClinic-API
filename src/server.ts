@@ -1,9 +1,9 @@
 import express from "express"
 import mongoose from "mongoose"
 
-import { router as tutors } from "./routes/tutors"
-import { router as pets } from "./routes/pets"
-import { config } from "./config/config"
+import { router as tutors } from "@/routes/tutors"
+import { router as pets } from "@/routes/pets"
+import { config } from "@/config/config"
 
 // Connect To MongoDB
 mongoose

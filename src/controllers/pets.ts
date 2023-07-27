@@ -1,6 +1,6 @@
 import { Response, Request } from "express"
-import { IPet, PetModel } from "../model/pet"
-import { ITutor, TutorModel } from "../model/tutor"
+import { IPet, PetModel } from "@/model/pet"
+import { ITutor, TutorModel } from "@/model/tutor"
 
 const createPet = async (req: Request, res: Response) => {
   try {
