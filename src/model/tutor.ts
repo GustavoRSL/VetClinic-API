@@ -1,5 +1,5 @@
 import { Document, InferSchemaType, Schema, model } from "mongoose";
-import { IPet, petSchema } from "./Pet";
+import { IPet, petSchema } from "./pet";
 
 interface ITutor extends Document {
   name: string;

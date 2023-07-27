@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { ITutor, TutorModel } from "../model/Tutor";
+import { ITutor, TutorModel } from "../model/tutor";
 
 const getAllTutors = async (req: Request, res: Response): Promise<Response> => {
   try {
@@ -11,7 +11,7 @@ const getAllTutors = async (req: Request, res: Response): Promise<Response> => {
 };
 
 // Rever está opção, para ordenar as propriedades.
-const createTutor = async (req: Request, res: Response): Promise<Response> => {
+const createTutor = async (req: Request, res: Response) => {
   try {
     const createdTutor: ITutor = await TutorModel.create(req.body);
 
