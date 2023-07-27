@@ -1,11 +1,11 @@
-import { Document, InferSchemaType, Schema, model } from "mongoose";
+import { Document, InferSchemaType, Schema, model } from "mongoose"
 
 interface IPet extends Document {
-  name: string;
-  species: string;
-  carry: string;
-  weight: number;
-  date_of_birth: Date;
+  name: string
+  species: string
+  carry: string
+  weight: number
+  date_of_birth: Date
 }
 
 const petSchema = new Schema<IPet>({
@@ -14,10 +14,10 @@ const petSchema = new Schema<IPet>({
   carry: { type: String, required: true },
   weight: { type: Number, required: true },
   date_of_birth: { type: Date, required: true },
-});
+})
 
-type Pet = InferSchemaType<typeof petSchema>;
+type Pet = InferSchemaType<typeof petSchema>
 
-const PetModel = model<Pet>("Pet", petSchema);
+const PetModel = model<Pet>("Pet", petSchema)
 
-export { IPet, PetModel, petSchema };
+export { IPet, PetModel, petSchema }

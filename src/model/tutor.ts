@@ -1,13 +1,13 @@
-import { Document, InferSchemaType, Schema, model } from "mongoose";
-import { IPet, petSchema } from "./pet";
+import { Document, InferSchemaType, Schema, model } from "mongoose"
+import { IPet, petSchema } from "./pet"
 
 interface ITutor extends Document {
-  name: string;
-  phone: string;
-  email: string;
-  date_of_birth: Date;
-  zip_code: string;
-  pets: IPet[];
+  name: string
+  phone: string
+  email: string
+  date_of_birth: Date
+  zip_code: string
+  pets: IPet[]
 }
 
 const tutorSchema = new Schema<ITutor>({
@@ -17,10 +17,10 @@ const tutorSchema = new Schema<ITutor>({
   date_of_birth: { type: Date, required: true },
   zip_code: { type: String, required: true },
   pets: { type: [petSchema], default: [] },
-});
+})
 
-type Tutor = InferSchemaType<typeof tutorSchema>;
+type Tutor = InferSchemaType<typeof tutorSchema>
 
-const TutorModel = model<Tutor>("Tutor", tutorSchema);
+const TutorModel = model<Tutor>("Tutor", tutorSchema)
 
-export { ITutor, TutorModel };
+export { ITutor, TutorModel }
