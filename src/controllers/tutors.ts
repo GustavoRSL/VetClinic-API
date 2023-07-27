@@ -40,24 +40,22 @@ const createTutor = async (req: Request, res: Response): Promise<Response> => {
   }
 };
 
-// const updateTutor = async (req: Request, res: Response) => {
-//   try {
-//     const { id } = req.params;
-//     const { idRemove, ...Tutor } = req.body;
-//     if (!id) return res.status(500).json({ msg: "Informe um ID!" });
+const updateTutor = async (req: Request, res: Response) => {
+  try {
+    const { id } = req.params;
+    const updateData = req.body;
 
-//     const data = Data;
-//     let newTutor: Tutor = data.find((tutor: Tutor) => tutor.id === +id);
-//     newTutor = { id, ...Tutor };
+    const updatedTutor = await TutorModel.findByIdAndUpdate(id, updateData, {
+      new: true,
+    });
+    if (!updateTutor)
+      return res.status(404).json({ error: "Tutor not found!" });
 
-//     if (!newTutor) return res.status(404).json({ msg: "Tutor not found!" });
-
-//     data.splice(+id - 1, 1, newTutor);
-//     return res.status(200).json(newTutor);
-//   } catch (error) {
-//     return res.status(500).json({ msg: "Error!" });
-//   }
-// };
+    return res.status(200).json(updatedTutor);
+  } catch (error) {
+    res.status(500).json({ error: "Error updating Tutor" });
+  }
+};
 
 // const deleteTutor = async (req: Request, res: Response) => {
 //   try {
@@ -76,4 +74,4 @@ const createTutor = async (req: Request, res: Response): Promise<Response> => {
 //   }
 // };
 
-export { getAllTutors, createTutor };
+export { getAllTutors, createTutor, updateTutor };
