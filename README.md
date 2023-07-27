@@ -29,33 +29,7 @@ $ npm i
 # Rode o comando para iniciar a aplicação
 $ npm start:prod
 ```
-### Estrutura de Pasta
-|---src
-|    |   server.ts
-|    |   tutors.json
-|    |
-|    +---config
-|    |       config.ts
-|    |
-|    +---controllers
-|    |       pets.ts
-|    |       tutors.ts
-|    |
-|    +---model
-|    |       pet.ts
-|    |       tutor.ts
-|    |
-|    \---routes
-|            pets.ts
-|            tutors.ts
-|   .env
-|   .env.example
-|   .gitignore
-|   nodemon.json
-|   package-lock.json
-|   package.json
-|   README.md
-|   tsconfig.json
 
 ## Autores
+
 - [@GustavoReisSouzaLima](https://github.com/GustavoReisSouzaLima)
