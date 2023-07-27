@@ -16,7 +16,7 @@ const tutorSchema = new Schema<ITutor>({
   email: { type: String, required: true },
   date_of_birth: { type: Date, required: true },
   zip_code: { type: String, required: true },
-  pets: { type: [petSchema] },
+  pets: { type: [petSchema], default: [] },
 });
 
 type Tutor = InferSchemaType<typeof tutorSchema>;
