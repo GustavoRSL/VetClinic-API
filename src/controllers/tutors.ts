@@ -13,25 +13,18 @@ const getAllTutors = async (req: Request, res: Response): Promise<Response> => {
 // Rever está opção, para ordenar as propriedades.
 const createTutor = async (req: Request, res: Response): Promise<Response> => {
   try {
-    const tutor = {
-      name: req.body.name,
-      phone: req.body.phone,
-      email: req.body.email,
-      date_of_birth: req.body.date_of_birth,
-      zip_code: req.body.zip_code,
-    };
-    const newTutor = new TutorModel(tutor);
-    const createdTutor: ITutor = await newTutor.save();
+    const createdTutor: ITutor = await TutorModel.create(req.body);
 
+    // Gambiarra?
     const orderedObject = {
       _id: createdTutor._id,
-      name: newTutor.name,
-      phone: newTutor.phone,
-      email: newTutor.email,
-      date_of_birth: newTutor.date_of_birth,
-      zip_code: newTutor.zip_code,
-      pets: newTutor.pets,
-      __v: newTutor.__v,
+      name: createdTutor.name,
+      phone: createdTutor.phone,
+      email: createdTutor.email,
+      date_of_birth: createdTutor.date_of_birth,
+      zip_code: createdTutor.zip_code,
+      pets: createdTutor.pets,
+      __v: createdTutor.__v,
     };
 
     return res.status(201).json(orderedObject);
