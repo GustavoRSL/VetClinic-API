@@ -18,6 +18,6 @@ const petSchema = new Schema<IPet>({
 
 type Pet = InferSchemaType<typeof petSchema>;
 
-const pet = model<Pet>("Pet", petSchema);
+const PetModel = model<Pet>("Pet", petSchema);
 
-export { IPet, pet };
+export { IPet, PetModel, petSchema };

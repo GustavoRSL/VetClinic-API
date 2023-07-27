@@ -3,7 +3,7 @@ import { Router } from "express";
 import mongoose from "mongoose";
 
 import { router as tutors } from "./routes/tutors";
-import { router as pets } from "./routes/pets";
+// import { router as pets } from "./routes/pets";
 import { config } from "./config/config";
 
 // Connect To MongoDB
@@ -24,7 +24,7 @@ const StartServer = () => {
     const router = Router();
     app.use(express.json());
     app.use("/api/v1", tutors);
-    app.use("/api/v1", pets);
+    // app.use("/api/v1", pets);
 
     app.listen(port, () => {
       console.log(`👂 Server is listening on http://localhost:${port} `);
