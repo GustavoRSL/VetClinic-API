@@ -1,31 +1,16 @@
 {
   "compilerOptions": {
-    "target": "es2017",                          
-    "module": "commonjs",                     
-    "lib": ["es6"],                             
-    "allowJs": true,                       
-    "outDir": "./dist",                        
-    "rootDir": "./src",                       
-    "removeComments": true,                
-    "typeRoots": [
-      "./node_modules/@types",
-      "./src/@types"
-    ],                          
-    "esModuleInterop": true,                  
-    "resolveJsonModule": true,
-    "experimentalDecorators": true,        
-    "emitDecoratorMetadata": true,         
-    "skipLibCheck": true,                     
-    "forceConsistentCasingInFileNames": true,
-    "baseUrl": ".",
+    "target": "es2016" /* Set the JavaScript language version for emitted JavaScript and include compatible library declarations. */,
+    "module": "commonjs" /* Specify what module code is generated. */,
+    "rootDir": "src",
+    "outDir": "./dist" /* Specify the root folder within your source files. */,
+    "moduleResolution": "node" /* Specify how TypeScript looks up a file from a given module specifier. */,
+    "forceConsistentCasingInFileNames": true /* Ensure that casing is correct in imports. */,
+    "strict": true /* Enable all strict type-checking options. */,
+    "skipLibCheck": true /* Skip type checking all .d.ts files. */,
     "paths": {
-      "@controllers/*": ["src/controllers/*"],
-      "@routes/*": ["src/routes/*"],
-      "@models/*": ["src/models/*"],
-      "@config/*": ["src/config/*"]
-    }
-  },
-  "include": [
-    "src/**/*"
-  ]
+      "@/*": ["*"]
+    },
+    "baseUrl": "src"
+  }
 }
