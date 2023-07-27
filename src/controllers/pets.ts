@@ -1,24 +1,28 @@
-// import { Response, Request } from "express";
-// import { Pet } from "src/model/pet";
-// import { Tutor } from "src/model/tutor";
-// import Data from "../tutors.json";
+import { Response, Request } from "express";
+import { IPet, PetModel } from "../model/Pet";
+import { ITutor, TutorModel } from "../model/Tutor";
 
-// const createPet = async (req: Request, res: Response) => {
-//   try {
-//     const { tutorId } = req.params;
-//     const pet = req.body;
-//     const newPet: Pet = pet;
+const createPet = async (req: Request, res: Response) => {
+  try {
+    const { tutorId } = req.params;
+    const newPet: IPet = await PetModel.create(req.body);
 
-//     const data = Data;
-//     const tutor: Tutor = data.find((tutor) => tutor.id === +tutorId);
+    const updateTutor: ITutor = await TutorModel.findByIdAndUpdate(
+      tutorId,
+      {
+        $push: { pets: newPet },
+      },
+      { new: true }
+    );
 
-//     tutor.pets.push(newPet);
+    if (!updateTutor)
+      return res.status(404).json({ error: "Tutor not found!" });
 
-//     return res.status(200).json(tutor.pets);
-//   } catch (error) {
-//     return res.status(500).json({ msg: "Error!" });
-//   }
-// };
+    return res.status(201).json(updateTutor);
+  } catch (error) {
+    res.status(500).json({ error: "Error creating Pet!" });
+  }
+};
 
 // // Lógica para não altear ID.
 // const updatePet = async (req: Request, res: Response) => {
@@ -61,4 +65,4 @@
 //   } catch (error) {}
 // };
 
-// export { createPet, updatePet, deletePet };
+export { createPet };
