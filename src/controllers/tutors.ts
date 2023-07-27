@@ -10,16 +10,35 @@ const getAllTutors = async (req: Request, res: Response): Promise<Response> => {
   }
 };
 
-// const createTutor = async (req: Request, res: Response) => {
-//   try {
-//     const newTutor: Tutor = req.body;
-//     const data = Data;
-//     data.push(newTutor);
-//     return res.status(201).json(newTutor);
-//   } catch (error) {
-//     return res.status(500).json({ msg: "Error!" });
-//   }
-// };
+// Rever está opção, para ordenar as propriedades.
+const createTutor = async (req: Request, res: Response): Promise<Response> => {
+  try {
+    const tutor = {
+      name: req.body.name,
+      phone: req.body.phone,
+      email: req.body.email,
+      date_of_birth: req.body.date_of_birth,
+      zip_code: req.body.zip_code,
+    };
+    const newTutor = new TutorModel(tutor);
+    const createdTutor: ITutor = await newTutor.save();
+
+    const orderedObject = {
+      _id: createdTutor._id,
+      name: newTutor.name,
+      phone: newTutor.phone,
+      email: newTutor.email,
+      date_of_birth: newTutor.date_of_birth,
+      zip_code: newTutor.zip_code,
+      pets: newTutor.pets,
+      __v: newTutor.__v,
+    };
+
+    return res.status(201).json(orderedObject);
+  } catch (error) {
+    res.status(500).json({ error: "Error creating Tutor" });
+  }
+};
 
 // const updateTutor = async (req: Request, res: Response) => {
 //   try {
@@ -57,4 +76,4 @@ const getAllTutors = async (req: Request, res: Response): Promise<Response> => {
 //   }
 // };
 
-export { getAllTutors };
+export { getAllTutors, createTutor };
