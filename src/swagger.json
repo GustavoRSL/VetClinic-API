@@ -72,7 +72,123 @@
             }
           },
           "500": {
-            "description": "Erro interno do servidor"
+            "description": "Erro interno do servidor",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/ServerError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/tutor/{id}": {
+      "put": {
+        "summary": "Atualizar Tutor",
+        "description": "Atualiza os dados de um Tutor existente",
+        "tags": ["Tutors"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID do Tutor a ser atualizado",
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "description": "Nome do tutor",
+                    "example": "Jonh Doe",
+                    "required": true
+                  },
+                  "phone": {
+                    "type": "string",
+                    "description": "Telefone do tutor",
+                    "example": "85989323895",
+                    "required": true
+                  },
+                  "email": {
+                    "type": "string",
+                    "description": "E-mail do tutor",
+                    "example": "jose.abreu@compasso.com",
+                    "required": true
+                  },
+                  "date_of_birth": {
+                    "type": "string",
+                    "format": "date-time",
+                    "description": "Data de nascimento do tutor",
+                    "example": "1993-12-12T10:10:00.000Z",
+                    "required": true
+                  },
+                  "zip_code": {
+                    "type": "string",
+                    "description": "Código postal do tutor",
+                    "example": "61760000",
+                    "required": true
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TutorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Messagem de erro, item não encontrado",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/NotFoundError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "Deletar Tutor",
+        "description": "Deleta um Tutor existente",
+        "tags": ["Tutors"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID do Tutor a ser deletado",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "Messagem de erro, item não encontrado",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/NotFoundError"
+                }
+              }
+            }
           }
         }
       }
@@ -217,6 +333,16 @@
             "type": "string",
             "description": "Messagem de erro interno do servidor",
             "example": "Internal Server Error"
+          }
+        }
+      },
+      "NotFoundError": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "description": "Messagem de erro, item não encontrado",
+            "example": "Item not found"
           }
         }
       }
