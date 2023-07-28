@@ -8,13 +8,16 @@ interface IPet extends Document {
   date_of_birth: Date
 }
 
-const petSchema = new Schema<IPet>({
-  name: { type: String, required: true },
-  species: { type: String, required: true },
-  carry: { type: String, required: true },
-  weight: { type: Number, required: true },
-  date_of_birth: { type: Date, required: true },
-})
+const petSchema = new Schema<IPet>(
+  {
+    name: { type: String, required: true },
+    species: { type: String, required: true },
+    carry: { type: String, required: true },
+    weight: { type: Number, required: true },
+    date_of_birth: { type: Date, required: true },
+  },
+  { versionKey: false },
+)
 
 type Pet = InferSchemaType<typeof petSchema>
 
