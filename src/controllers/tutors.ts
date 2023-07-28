@@ -3,7 +3,7 @@ import { ITutor, TutorModel } from "@/model/tutor"
 import "express-async-errors"
 import { BadRequestError } from "@/helpers/api-erros"
 
-const getAllTutors = async (req: Request, res: Response): Promise<Response> => {
+const getAllTutors = async (req: Request, res: Response) => {
   const tutors: ITutor[] = await TutorModel.find()
   return res.status(200).json(tutors)
 }
