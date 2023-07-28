@@ -1,76 +1,67 @@
 import { Response, Request } from "express"
 import { IPet, PetModel } from "@/model/pet"
 import { ITutor, TutorModel } from "@/model/tutor"
+import { NotFoundError } from "@/helpers/api-erros"
+import "express-async-errors"
 
 const createPet = async (req: Request, res: Response) => {
-  try {
-    const { tutorId } = req.params
-    const newPet: IPet = await PetModel.create(req.body)
+  const { tutorId } = req.params
 
-    const updateTutor: ITutor | null = await TutorModel.findByIdAndUpdate(
-      tutorId,
-      {
-        $push: { pets: newPet },
-      },
-      { new: true },
-    )
+  const newPet: IPet = await PetModel.create(req.body)
 
-    if (!updateTutor) return res.status(404).json({ error: "Tutor not found!" })
+  const updateTutor: ITutor | null = await TutorModel.findByIdAndUpdate(
+    tutorId,
+    {
+      $push: { pets: newPet },
+    },
+    { new: true },
+  )
 
-    return res.status(201).json(newPet)
-  } catch (error) {
-    res.status(500).json({ error: "Error creating Pet!" })
-  }
+  if (!updateTutor) throw new NotFoundError("Tutor not found!")
+
+  return res.status(201).json(newPet)
 }
 
 const updatePet = async (req: Request, res: Response) => {
-  try {
-    const { petId, tutorId } = req.params
-    const updatePet: IPet | null = await PetModel.findByIdAndUpdate(
-      petId,
-      req.body,
-      {
-        new: true,
-      },
-    )
+  const { petId, tutorId } = req.params
 
-    if (!updatePet) return res.status(404).json({ error: "Pet not Found!" })
+  const updatePet: IPet | null = await PetModel.findByIdAndUpdate(
+    petId,
+    req.body,
+    {
+      new: true,
+    },
+  )
 
-    const updateTutor: ITutor | null = await TutorModel.findByIdAndUpdate(
-      tutorId,
-      { $set: { "pets.$[pet]": updatePet } },
-      { new: true, arrayFilters: [{ "pet._id": petId }] },
-    )
+  if (!updatePet) throw new NotFoundError("Pet not Found!")
 
-    if (!updateTutor) return res.status(404).json({ error: "Tutor not Found!" })
+  const updateTutor: ITutor | null = await TutorModel.findByIdAndUpdate(
+    tutorId,
+    { $set: { "pets.$[pet]": updatePet } },
+    { new: true, arrayFilters: [{ "pet._id": petId }] },
+  )
 
-    return res.status(200).json(updatePet)
-  } catch (error) {
-    res.status(500).json({ error: "Error updating Pet!" })
-  }
+  if (!updateTutor) throw new NotFoundError("Tutor not Found!")
+
+  return res.status(200).json(updatePet)
 }
 
 const deletePet = async (req: Request, res: Response) => {
-  try {
-    const { petId, tutorId } = req.params
+  const { petId, tutorId } = req.params
 
-    const deletePet: IPet | null = await PetModel.findByIdAndDelete(petId)
+  const deletePet: IPet | null = await PetModel.findByIdAndDelete(petId)
 
-    if (deletePet === null)
-      return res.status(404).json({ error: "Pet not Found!" })
+  if (!deletePet) throw new NotFoundError("Pet not Found!")
 
-    const updateTutor = await TutorModel.findByIdAndUpdate(
-      tutorId,
-      { $pull: { pets: { _id: petId } } },
-      { new: true },
-    )
+  const updateTutor = await TutorModel.findByIdAndUpdate(
+    tutorId,
+    { $pull: { pets: { _id: petId } } },
+    { new: true },
+  )
 
-    if (!updateTutor) return res.status(404).json({ error: "Tutor not Found!" })
+  if (!updateTutor) throw new NotFoundError("Tutor not Found!")
 
-    return res.sendStatus(200)
-  } catch (error) {
-    res.status(500).json({ error: "Error deleting Pet!" })
-  }
+  return res.sendStatus(200)
 }
 
 export { createPet, updatePet, deletePet }
