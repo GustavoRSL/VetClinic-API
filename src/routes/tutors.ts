@@ -1,16 +1,16 @@
-import { Router } from "express";
+import { Router } from "express"
 import {
   getAllTutors,
   createTutor,
   updateTutor,
   deleteTutor,
-} from "../controllers/tutors";
+} from "@/controllers/tutors"
 
-const router = Router();
+const router = Router()
 
-router.get("/tutors", getAllTutors);
-router.post("/tutor", createTutor);
-router.put("/tutor/:id", updateTutor);
-router.delete("/tutor/:id", deleteTutor);
+router.get("/tutors", getAllTutors)
+router.post("/tutor", createTutor)
+router.put("/tutor/:id", updateTutor)
+router.delete("/tutor/:id", deleteTutor)
 
-export { router };
+export { router }
