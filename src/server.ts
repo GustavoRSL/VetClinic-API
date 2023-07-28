@@ -4,6 +4,8 @@ import mongoose from "mongoose"
 import { router as tutors } from "@/routes/tutors"
 import { router as pets } from "@/routes/pets"
 import { config } from "@/config/config"
+import { errorMiddleware } from "@/middlewares/error"
+import "express-async-errors"
 
 // Connect To MongoDB
 mongoose
@@ -24,6 +26,8 @@ const StartServer = () => {
     app.use(express.json())
     app.use("/api/v1", tutors)
     app.use("/api/v1", pets)
+
+    app.use(errorMiddleware)
 
     app.listen(port, () => {
       console.log(`👂 Server is listening on http://localhost:${port} `)
