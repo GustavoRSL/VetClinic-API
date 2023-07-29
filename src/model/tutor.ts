@@ -10,14 +10,17 @@ interface ITutor extends Document {
   pets: IPet[]
 }
 
-const tutorSchema = new Schema<ITutor>({
-  name: { type: String, required: true },
-  phone: { type: String, required: true },
-  email: { type: String, required: true },
-  date_of_birth: { type: Date, required: true },
-  zip_code: { type: String, required: true },
-  pets: { type: [petSchema], default: [] },
-})
+const tutorSchema = new Schema<ITutor>(
+  {
+    name: { type: String, required: true },
+    phone: { type: String, required: true },
+    email: { type: String, required: true },
+    date_of_birth: { type: Date, required: true },
+    zip_code: { type: String, required: true },
+    pets: { type: [petSchema], default: [] },
+  },
+  { versionKey: false },
+)
 
 type Tutor = InferSchemaType<typeof tutorSchema>
 
