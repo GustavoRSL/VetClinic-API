@@ -1,18 +1,35 @@
-# challenger-01 - VetClinic
+# VetClinic API
 
-### Pré-requisitos
+## Descrição
 
-Versões utilizadas no desenvolvimento da aplicação
+VetClinic é uma aplicação de gerenciamento de uma clínica veterinária. Ela fornece endpoints para realizar operações relacionadas a animais e proprietários dos animais.
+
+## Pré-requisitos
+
+Versões utilizadas no desenvolvimento da aplicação:
 
 - **Node.js:** v20.4.0 ou superior.
+- **MongoDB Atlas:** Necessário ter uma conta e conhecimentos para configurar com suas credenciais as variáveis de ambiente para testar a aplicação, pois é necessário a conexão com MongoDB para funcionamento das rotas.
 
-Em caso de erros de compatilidade utilizar Nvm para alterar versão do Node. [Tutorial para utilizar Nvm](https://medium.com/linkapi-solutions/conventional-commits-pattern-3778d1a1e657)
+Em caso de erros de compatibilidade, é recomendado utilizar o Nvm para alterar a versão do Node. [Tutorial para utilizar Nvm](https://medium.com/linkapi-solutions/conventional-commits-pattern-3778d1a1e657)
 
 ## Stack utilizada
 
-**Back-end:** Express, MongoDB - Mongoose, dotenv.
+**Back-end:**
 
-**Dev Tools:** Npm, Eslint, Prettier, Nodemon
+- TypeScript
+- Express
+- MongoDB Atlas - Mongoose
+- dotenv
+- Swagger-ui-express.
+
+**Dev Tools:**
+
+- Nodemon
+- Eslint
+- Prettier
+- Jest
+- Insomnia
 
 ## Como instalar o projeto e iniciar a aplicação
 
@@ -23,13 +40,32 @@ $ git clone https://github.com/GustavoReisSouzaLima/challenger-01.git
 # Entre no repositório clonado
 $ cd challenger-01
 
-# Instale as dependencias do projeto
+# Instale as dependências do projeto
 $ npm i
 
-# Rode o comando para iniciar a aplicação
-$ npm start:prod
+# Crie um arquivo .env e configure as variáveis de ambiente de acordo com .env.example para conectar com o MongoDB Atlas
+MONGO_USERNAME = SEU_USUÁRIO
+MONGO_PASSWORD = SUA_SENHA
+PORT = SUA_PORTA
+
+# Rode o comando para buildar e iniciar a aplicação
+$ npm run start:prod
+
+# Aguarde a seguinte mensagem para saber que a aplicação está funcionando
+  - Connected to MongoDB Sucessfull!
+  - Server is listening on http://localhost:3000
+
+# Outros scripts estão disponíveis no arquivo package.json
+
+Por padrão, a aplicação estará rodando na porta 3000 caso a porta não seja especificada no arquivo .env
 ```
 
-## Autores
+## Informações da API
 
-- [@GustavoReisSouzaLima](https://github.com/GustavoReisSouzaLima)
+**Swagger:**
+
+- Para acessar as informações da documentação da API utilizando o Swagger, acesse a rota: http://localhost:3000/api-docs
+
+**Insominia**
+
+- Também há um arquivo no diretório raiz nomeado como **Insomnia.json**, caso queira importar as rotas utilizando o Insomnia.
