@@ -16,7 +16,7 @@
       "post": {
         "summary": "Cadastro de Tutor",
         "description": "Rota responsável para cadastrar um Tutor",
-        "tags": ["Tutors"],
+        "tags": ["Tutor"],
         "requestBody": {
           "content": {
             "application/json": {
@@ -54,12 +54,12 @@
     },
     "/tutors": {
       "get": {
-        "summary": "Lista de Tutors",
+        "summary": "Lista de Tutor",
         "description": "Retorna a lista de todos os Tutors",
-        "tags": ["Tutors"],
+        "tags": ["Tutor"],
         "responses": {
           "200": {
-            "description": "Sucesso, retorna a lista de Tutors",
+            "description": "Sucesso, retorna a lista de Tutor",
             "content": {
               "application/json": {
                 "schema": {
@@ -89,7 +89,7 @@
       "put": {
         "summary": "Atualizar Tutor",
         "description": "Atualiza os dados de um Tutor existente",
-        "tags": ["Tutors"],
+        "tags": ["Tutor"],
         "parameters": [
           {
             "name": "id",
@@ -166,7 +166,7 @@
       "delete": {
         "summary": "Deletar Tutor",
         "description": "Deleta um Tutor existente",
-        "tags": ["Tutors"],
+        "tags": ["Tutor"],
         "parameters": [
           {
             "name": "id",
@@ -186,6 +186,143 @@
                 "schema": {
                   "type": "object",
                   "$ref": "#/components/schemas/NotFoundError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/pet/{tutorId}": {
+      "post": {
+        "summary": "Cadastrar um Pet em um Tutor",
+        "description": "Cadastrar um Pet e cadastra-lo ao seu Tutor",
+        "tags": ["Pet"],
+        "parameters": [
+          {
+            "name": "tutorId",
+            "in": "path",
+            "description": "ID do Tutor a ser adicionado o Pet",
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Pet"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/PetResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Erro interno do servidor",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/ServerError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/pet/{petId}/tutor/{tutorId}": {
+      "put": {
+        "summary": "Atualizar Pet de um Tutor",
+        "description": "Atualizar um Pet de um Tutor",
+        "tags": ["Pet"],
+        "parameters": [
+          {
+            "name": "petId",
+            "in": "path",
+            "description": "ID do Pet a ser atulizado",
+            "required": true
+          },
+          {
+            "name": "tutorId",
+            "in": "path",
+            "description": "ID do Tutor a ser atualizado o Pet",
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Pet"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/PetResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Erro interno do servidor",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/ServerError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "Deletar Pet de um Tutor",
+        "description": "Deletar um Pet de um Tutor",
+        "tags": ["Pet"],
+        "parameters": [
+          {
+            "name": "petId",
+            "in": "path",
+            "description": "ID do Pet a ser deletado",
+            "required": true
+          },
+          {
+            "name": "tutorId",
+            "in": "path",
+            "description": "ID do Tutor a ser deletado o Pet",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Erro interno do servidor",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/ServerError"
                 }
               }
             }
@@ -273,6 +410,48 @@
             },
             "description": "Lista de pets do tutor",
             "default": []
+          }
+        }
+      },
+      "PetResponse": {
+        "type": "object",
+        "properties": {
+          "_id": {
+            "type": "string",
+            "description": "ID do tutor",
+            "example": "64c2c567bc9adb3de05aa238",
+            "required": true
+          },
+          "name": {
+            "type": "string",
+            "description": "Nome do pet",
+            "example": "Lilo",
+            "required": true
+          },
+          "species": {
+            "type": "string",
+            "description": "Espécie do pet",
+            "example": "dog",
+            "required": true
+          },
+          "carry": {
+            "type": "string",
+            "description": "Transporte do pet",
+            "example": "p",
+            "required": true
+          },
+          "weight": {
+            "type": "number",
+            "description": "Peso do pet",
+            "example": 5,
+            "required": true
+          },
+          "date_of_birth": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Data de nascimento do pet",
+            "example": "1993-12-12T12:10:00.000Z",
+            "required": true
           }
         }
       },
