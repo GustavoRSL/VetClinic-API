@@ -11,13 +11,14 @@ afterAll(async () => {
   await mongoose.connection.close()
 })
 
+const baseURL: string = "/api/v1"
 // Variável para salvar ID do teste de criação para ser deletado depois.
-let auxID: string
+let id: string
 
 // Route Tutors - GET
-describe("GET /api/v1/tutors", () => {
+describe("GET /tutors", () => {
   it("Deve retornar status 200 e um JSON com os Tutors", async () => {
-    const response = await request(app).get("/api/v1/tutors")
+    const response = await request(app).get(`${baseURL}/tutors`)
 
     expect(response.status).toEqual(200)
     expect(Array.isArray(response.body)).toBe(true)
@@ -25,7 +26,7 @@ describe("GET /api/v1/tutors", () => {
 })
 
 // Route Tutors - POST
-describe("POST /api/v1/tutorr", () => {
+describe("POST /tutor", () => {
   it("Deve retornar status 201 e verificar se propriedade _id foi criada.", async () => {
     const tutorData = {
       name: "Jonas",
@@ -34,15 +35,15 @@ describe("POST /api/v1/tutorr", () => {
       date_of_birth: new Date("1993-12-12 10:10"),
       zip_code: "61760000",
     }
-    const response = await request(app).post("/api/v1/tutor").send(tutorData)
+    const response = await request(app).post(`${baseURL}/tutor`).send(tutorData)
 
-    auxID = response.body._id
+    id = response.body._id
     expect(response.status).toEqual(201)
     expect(response.body._id).toBeDefined()
   })
 })
 
-describe("POST /api/v1/tutor", () => {
+describe("POST /tutor", () => {
   it("Deve retornar status 500, não foi criado documento!", async () => {
     const tutorData = {
       name: "Jonas",
@@ -51,21 +52,21 @@ describe("POST /api/v1/tutor", () => {
       zip_code: "61760000",
     }
 
-    const response = await request(app).post("/api/v1/tutor").send(tutorData)
+    const response = await request(app).post(`${baseURL}/tutor`).send(tutorData)
     expect(response.status).toEqual(500)
     expect(response.body.message).toEqual("Internal Server Error")
   })
 })
 
 // Route Tutors - PUT
-describe("POST /api/v1/tutor/:id", () => {
+describe("POST /tutor/:id", () => {
   it("Deve retornar status 200, objeto que foi atualizado", async () => {
     const tutorData = {
       name: "Gustavo",
     }
 
     const response = await request(app)
-      .put("/api/v1/tutor/64c3f5e1e56dee3845151064")
+      .put(`${baseURL}/tutor/${id}`)
       .send(tutorData)
     expect(response.status).toEqual(200)
     expect(response.body.name).toEqual(tutorData.name)
@@ -73,9 +74,9 @@ describe("POST /api/v1/tutor/:id", () => {
 })
 
 // Route Tutors - Delete
-describe("Delete /api/v1/tutor/:id", () => {
-  it("Deve retornar status 201 ao deletar documento", async () => {
-    const response = await request(app).delete(`/api/v1/tutor/${auxID}`)
+describe("Delete /tutor/:id", () => {
+  it("Deve retornar status 200 ao deletar documento", async () => {
+    const response = await request(app).delete(`${baseURL}/tutor/${id}`)
 
     expect(response.status).toEqual(200)
     expect(response.body).toEqual({})
