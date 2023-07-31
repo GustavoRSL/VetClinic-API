@@ -44,9 +44,8 @@ $ cd challenger-01
 $ npm i
 
 # Crie um arquivo .env e configure as variáveis de ambiente de acordo com .env.example para conectar com o MongoDB Atlas
-MONGO_USERNAME = SEU_USUÁRIO
-MONGO_PASSWORD = SUA_SENHA
-PORT = SUA_PORTA
+MONGO_URL = Add your connection string
+PORT = Add your port
 
 # Rode o comando para buildar e iniciar a aplicação
 $ npm run start:prod
