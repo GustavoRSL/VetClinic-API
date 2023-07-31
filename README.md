@@ -1,3 +1,7 @@
+# Nome: Gustavo Reis Souza Lima
+
+# E-mail: gustavo.lima.pb@compasso.com.br
+
 # VetClinic API
 
 ## Descrição
