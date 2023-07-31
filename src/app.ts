@@ -1,7 +1,7 @@
 import express from "express"
 
-import { router as tutors } from "@/routes/tutors"
-import { router as pets } from "@/routes/pets"
+import { router as routeTutor } from "@/routes/tutors"
+import { router as routePet } from "@/routes/pets"
 import { errorMiddleware } from "@/middlewares/error"
 import "express-async-errors"
 
@@ -17,8 +17,8 @@ app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument))
 app.use(express.json())
 
 // Routes
-app.use("/api/v1", tutors)
-app.use("/api/v1", pets)
+app.use("/api/v1", routeTutor)
+app.use("/api/v1", routePet)
 
 // Middlewares customs
 app.use(errorMiddleware)
