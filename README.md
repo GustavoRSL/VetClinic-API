@@ -4,20 +4,20 @@
 
 # VetClinic API
 
-## Descrição
+## Description
 
-VetClinic é uma aplicação de gerenciamento de uma clínica veterinária. Ela fornece endpoints para realizar operações relacionadas a animais e proprietários dos animais.
+VetClinic is an application for managing a veterinary clinic. It provides endpoints to perform operations related to animals and animal owners.
 
-## Pré-requisitos
+## Prerequisites
 
-Versões utilizadas no desenvolvimento da aplicação:
+Versions used in the development of the application:
 
-- **Node.js:** v20.4.0 ou superior.
-- **MongoDB Atlas:** Necessário ter uma conta e conhecimentos para configurar com suas credenciais as variáveis de ambiente para testar a aplicação, pois é necessário a conexão com MongoDB para funcionamento das rotas.
+- **Node.js:** v20.4.0 or higher.
+- **MongoDB Atlas:** You need to have an account and knowledge to set up environment variables with your credentials to test the application since it requires a connection to MongoDB to work with the routes.
 
-Em caso de erros de compatibilidade, é recomendado utilizar o Nvm para alterar a versão do Node. [Tutorial para utilizar Nvm](https://medium.com/linkapi-solutions/conventional-commits-pattern-3778d1a1e657)
+In case of compatibility errors, it is recommended to use Nvm to change the Node version. [Tutorial to use Nvm](https://fabiojanio.medium.com/nvm-gerencie-m%C3%BAltiplas-instala%C3%A7%C3%B5es-do-node-js-6fcd0f13aaf7)
 
-## Stack utilizada
+## Stack used
 
 **Back-end:**
 
@@ -35,40 +35,40 @@ Em caso de erros de compatibilidade, é recomendado utilizar o Nvm para alterar 
 - Jest
 - Insomnia
 
-## Como instalar o projeto e iniciar a aplicação
+## How to install the project and start the application
 
 ```bash
-# Clone o repositório
+# Clone the repository
 $ git clone https://github.com/GustavoReisSouzaLima/challenger-01.git
 
-# Entre no repositório clonado
+# Enter the cloned repository
 $ cd challenger-01
 
-# Instale as dependências do projeto
+# Install project dependencies
 $ npm i
 
-# Crie um arquivo .env e configure as variáveis de ambiente de acordo com .env.example para conectar com o MongoDB Atlas
+# Create a .env file and configure the environment variables according to .env.example to connect to MongoDB Atlas
 MONGO_URL = Add your connection string
 PORT = Add your port
 
-# Rode o comando para buildar e iniciar a aplicação
+# Run the command to build and start the application
 $ npm run start:prod
 
-# Aguarde a seguinte mensagem para saber que a aplicação está funcionando
-  - Connected to MongoDB Sucessfull!
+# Wait for the following message to know that the application is running
+  - Connected to MongoDB Successfully!
   - Server is listening on http://localhost:3000
 
-# Outros scripts estão disponíveis no arquivo package.json
+# Other scripts are available in the package.json file
 
-Por padrão, a aplicação estará rodando na porta 3000 caso a porta não seja especificada no arquivo .env
+By default, the application will be running on port 3000 if the port is not specified in the .env file.
 ```
 
-## Informações da API
+## API Information
 
 **Swagger:**
 
-- Para acessar as informações da documentação da API utilizando o Swagger, acesse a rota: http://localhost:3000/api-docs
+- To access the API documentation using Swagger, go to the route: http://localhost:3000/api-docs
 
 **Insominia**
 
-- Também há um arquivo no diretório raiz nomeado como **Insomnia.json**, caso queira importar as rotas utilizando o Insomnia.
+- There is also a file in the root directory named Insomnia.json, in case you want to import the routes using Insomnia.
